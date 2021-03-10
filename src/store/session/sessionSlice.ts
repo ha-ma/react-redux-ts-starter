@@ -21,12 +21,15 @@ const initialState = {
   selectModalOpen: false
 };
 
-export const loginRequest = createAsyncThunk("session/LOGIN", async (args: { email: string; password: string }) => {
-  // const { email, password } = args;
-  // const response = await auth.signInWithEmailAndPassword(email, password)
-  const response = "login";
-  return response;
-});
+export const loginRequest = createAsyncThunk(
+  "session/LOGIN",
+  async (args: { email: string; password: string }) => {
+    // const { email, password } = args;
+    // const response = await auth.signInWithEmailAndPassword(email, password)
+    const response = "login";
+    return response;
+  }
+);
 
 export const slice = createSlice({
   name: "session",
@@ -50,7 +53,7 @@ export const slice = createSlice({
     },
     "session/login/rejected": (state: SessionState, action) => {
       state.status = "failed";
-      console.log('action.error', action.error);
+      console.log("action.error", action.error);
     }
   }
 });
