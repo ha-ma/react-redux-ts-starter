@@ -2,17 +2,28 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { store, persistor } from "./store/store";
-import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { PersistGate } from "redux-persist/integration/react";
 
+//  providers
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/styles";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import { Provider as ReduxProvider } from "react-redux";
+
+//  styles
+import { muiTheme, origTheme } from "./assets/styles/theme";
+
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
+    <ReduxProvider store={store}>
+      <MuiThemeProvider theme={{ ...muiTheme, origTheme }}>
+        <StyledThemeProvider theme={{ ...muiTheme, ...origTheme }}>
+          <PersistGate loading={null} persistor={persistor}>
+            <App />
+          </PersistGate>
+        </StyledThemeProvider>
+      </MuiThemeProvider>
+    </ReduxProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

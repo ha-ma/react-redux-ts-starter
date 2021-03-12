@@ -30,8 +30,8 @@ module.exports = {
         "no-dupe-class-members": "error",
 
         //  宣言はしているが利用していない不要な変数を拒否 引数はOK
-        "no-unused-vars": ["error", { args: "none" }],
-        "@typescript-eslint/no-unused-vars": ["error", { args: "none" }],
+        "no-unused-vars": ["off", { args: "none" }],
+        "@typescript-eslint/no-unused-vars": ["off", { args: "none" }],
 
         //  配列はリテラル文法で作成を強制
         "no-array-constructor": "error",
