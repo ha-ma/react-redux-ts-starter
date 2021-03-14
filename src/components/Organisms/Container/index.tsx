@@ -4,4 +4,4 @@ const Component: React.FC = () => {
   return <div>Container</div>;
 };
 
-export { Component };
+export default Component;
