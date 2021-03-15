@@ -11,7 +11,7 @@ import styled from "styled-components";
 
 interface HeaderTabsProps {
   value?: number | string;
-  onChange?: (event: React.ChangeEvent<{}>, newValue: number | string) => void;
+  onChange?: (event: React.ChangeEvent<{}>, newValue: string) => void;
 }
 export const HeaderTabs = withStyles(theme =>
   createStyles({
@@ -21,7 +21,9 @@ export const HeaderTabs = withStyles(theme =>
     },
     indicator: {
       top: 0,
-      bottom: "unset"
+      bottom: "unset",
+      height: 3,
+      backgroundColor: theme.colorPicker("black")
     }
   })
 )((props: HeaderTabsProps) => <Tabs {...props} />);

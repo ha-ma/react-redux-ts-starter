@@ -26,19 +26,17 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 library.add(fab, fas, far);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ReduxProvider store={store}>
-      <MuiThemeProvider theme={{ ...muiTheme, ...origTheme }}>
-        <MuiStylesProvider injectFirst>
-          <StyledThemeProvider theme={{ ...muiTheme, ...origTheme }}>
-            <PersistGate loading={null} persistor={persistor}>
-              <App />
-            </PersistGate>
-          </StyledThemeProvider>
-        </MuiStylesProvider>
-      </MuiThemeProvider>
-    </ReduxProvider>
-  </React.StrictMode>,
+  <ReduxProvider store={store}>
+    <MuiThemeProvider theme={{ ...muiTheme, ...origTheme }}>
+      <MuiStylesProvider injectFirst>
+        <StyledThemeProvider theme={{ ...muiTheme, ...origTheme }}>
+          <PersistGate loading={null} persistor={persistor}>
+            <App />
+          </PersistGate>
+        </StyledThemeProvider>
+      </MuiStylesProvider>
+    </MuiThemeProvider>
+  </ReduxProvider>,
   document.getElementById("root")
 );
 

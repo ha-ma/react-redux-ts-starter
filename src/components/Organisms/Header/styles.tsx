@@ -6,15 +6,15 @@ import {
 import {
   AppBar,
   AppBarProps,
+  Avatar,
+  AvatarProps,
   createStyles,
   IconButton,
   IconButtonProps,
-  Tab,
-  TabProps,
-  Tabs,
-  TabsProps,
   Toolbar,
   ToolbarProps,
+  Typography,
+  TypographyProps,
   withStyles
 } from "@material-ui/core";
 import styled from "styled-components";
@@ -24,20 +24,23 @@ export const StyledAppBar = withStyles(theme =>
   createStyles({})
 )((props: StyledAppBarProps) => <AppBar {...props} />);
 
-interface StyledToolbarProps extends ToolbarProps {}
+interface StyledToolbarProps extends ToolbarProps {
+  height: number;
+}
 export const StyledToolbar = withStyles(theme =>
   createStyles({
     root: {
       backgroundColor: theme.colorPicker("grey", { code: "500" }),
-      alignItems: "stretch",
-      height: 64
+      alignItems: "stretch"
     }
   })
-)((props: StyledToolbarProps) => <Toolbar {...props} />);
+)((props: StyledToolbarProps) => (
+  <Toolbar {...props} style={{ height: props.height }} />
+));
 
 //  Logo
-interface WrapperLogoProps {}
-export const WrapperLogo = styled.div<WrapperLogoProps>(({ theme }) => {
+interface LogoWrapperProps {}
+export const LogoWrapper = styled.div<LogoWrapperProps>(({ theme }) => {
   return {
     padding: 0,
     display: "flex",
@@ -56,16 +59,18 @@ export const Logo = styled.img<LogoProps>(({ theme }) => {
   };
 });
 
-export const LogoLabel = styled.span(({ theme }) => {
-  return {
-    fontFamily: "Roboto Condensed",
-    fontSize: 28,
-    marginLeft: theme.spacing(1)
-  };
-});
+export const LogoLabel = withStyles(theme =>
+  createStyles({
+    root: {
+      fontFamily: "Roboto Condensed",
+      fontSize: 28,
+      marginLeft: theme.spacing(1)
+    }
+  })
+)((props: TypographyProps) => <Typography {...props} />);
 
 //  Tabs
-export const WrapperTabs = styled.div(({ theme }) => {
+export const TabsWrapper = styled.div(({ theme }) => {
   return {
     height: "100%",
     display: "flex",
@@ -77,7 +82,7 @@ export const WrapperTabs = styled.div(({ theme }) => {
 });
 
 //  Actions
-export const WrapperActions = styled.div(({ theme }) => {
+export const ActionsWrapper = styled.div(({ theme }) => {
   return {
     display: "flex",
     flexDirection: "row",
@@ -89,16 +94,27 @@ interface StyledIconButtonProps extends IconButtonProps {}
 export const StyledIconButton = withStyles(theme =>
   createStyles({
     root: {
-      marginLeft: theme.spacing(1.5)
+      marginLeft: theme.spacing(2),
+      padding: theme.spacing(1)
     }
   })
 )((props: StyledIconButtonProps) => <IconButton {...props} />);
 
 interface StyledFontAwesomeIconProps extends FontAwesomeIconProps {}
-export const StyledFontAwesomeIcon = withStyles(theme =>
+export const StyledFontAwesomeIcon = styled(
+  FontAwesomeIcon
+)<StyledFontAwesomeIconProps>(({ theme }) => {
+  return {
+    fontSize: theme.fontSize("icon"),
+    color: theme.colorPicker("grey", { code: "900" })
+  };
+});
+
+interface StyledAvatarProps extends AvatarProps {}
+export const StyledAvatar = withStyles(theme =>
   createStyles({
     root: {
-      fontSize: theme.fontSize("icon")
+      backgroundColor: theme.colorPicker("grey", { code: "900" })
     }
   })
-)((props: StyledFontAwesomeIconProps) => <FontAwesomeIcon {...props} />);
+)((props: StyledAvatarProps) => <Avatar {...props} />);

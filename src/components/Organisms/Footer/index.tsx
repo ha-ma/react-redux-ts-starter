@@ -1,7 +1,12 @@
 import React from "react";
 
-const Component: React.FC = () => {
-  return <div>Footer</div>;
+import { StyledToolbar } from "./styles";
+
+interface ComponentProps {
+  height: number;
+}
+const Component: React.FC<ComponentProps> = props => {
+  return <StyledToolbar height={props.height}>Footer</StyledToolbar>;
 };
 
 export default Component;

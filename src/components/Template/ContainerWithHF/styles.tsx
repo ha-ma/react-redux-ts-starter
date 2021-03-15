@@ -1,14 +1,25 @@
+import React from "react";
+import {
+  Container,
+  ContainerProps,
+  createStyles,
+  withStyles
+} from "@material-ui/core";
 import styled from "styled-components";
 
-import { Container, ContainerProps } from "@material-ui/core";
-
-export const Wrapper = styled.div(({ theme }) => {
-  return {};
+export const Wrapper = styled.div<{
+  headerHeight: number;
+  footerHeight: number;
+}>(({ headerHeight, footerHeight, theme }) => {
+  return {
+    height: "100%",
+    paddingTop: headerHeight,
+    paddingBottom: footerHeight,
+    overflowY: "auto"
+  };
 });
 
 interface StyledContainerProps extends ContainerProps {}
-export const StyledContainer = styled(Container)<StyledContainerProps>(
-  ({ theme }) => {
-    return {};
-  }
-);
+export const StyledContainer = withStyles(theme =>
+  createStyles({})
+)((props: StyledContainerProps) => <Container {...props} />);

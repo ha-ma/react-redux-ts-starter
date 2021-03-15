@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 //  page componens
 import Home from "../Pages/Home";
-import Page1 from "../Pages/Page1";
+import Page1 from "../Pages/Service";
 
 //  styled components
 import { Wrapper } from "./styles";

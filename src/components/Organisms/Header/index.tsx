@@ -6,65 +6,91 @@ import Img_Logo from "../../../assets/images/common/logo.png";
 //  atom , molucule components
 import { HeaderTabs } from "../../Molucules/Tabs";
 import { HeaderTab } from "../../Atoms/Tab";
+import { ServiceContentMenuItem } from "../../Atoms/MenuItem";
+import { ServiceContentMenu } from "../../Molucules/Menu";
 
 //  styled components
 import {
   StyledToolbar,
   StyledAppBar,
-  WrapperLogo,
-  WrapperTabs,
-  WrapperActions,
+  LogoWrapper,
+  TabsWrapper,
+  ActionsWrapper,
   Logo,
   LogoLabel,
   StyledIconButton,
-  StyledFontAwesomeIcon
+  StyledFontAwesomeIcon,
+  StyledAvatar
 } from "./styles";
 
-//  mui components
-import { Avatar } from "@material-ui/core";
+//  modules
+import SelfClass from "./modules";
 
-const Component: React.FC = () => {
-  const [tabValue, setTabValue] = React.useState<string | number>("test-0");
+interface ComponentProps {
+  height: number;
+}
+const Component: React.FC<ComponentProps> = props => {
+  const selfClass = new SelfClass();
+  const { tabs, accounts } = selfClass.list;
+  const [tabValue, setTabValue] = React.useState<string>(tabs[0].value);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleOnTabsChange = (
     event: React.ChangeEvent<{}>,
-    newValue: string | number
+    newValue: string
   ) => {
     setTabValue(newValue);
   };
 
+  const handleOnAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleOnAvatarClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <StyledAppBar position="relative" elevation={0}>
-      <StyledToolbar>
+    <StyledAppBar position="absolute" elevation={0}>
+      <StyledToolbar height={props.height}>
         {/* Logo */}
-        <WrapperLogo>
+        <LogoWrapper>
           <Logo src={Img_Logo} />
           <LogoLabel>MANAGER</LogoLabel>
-        </WrapperLogo>
+        </LogoWrapper>
 
         {/* Tabs */}
-        <WrapperTabs>
+        <TabsWrapper>
           <HeaderTabs value={tabValue} onChange={handleOnTabsChange}>
-            {new Array(3).fill("").map((val, i) => (
+            {selfClass.list.tabs.map(val => (
               <HeaderTab
-                key={i}
-                label={"test"}
-                id={`test-${i}`}
-                value={`test-${i}`}
+                key={val.id}
+                label={val.label}
+                id={val.id}
+                value={val.value}
               />
             ))}
           </HeaderTabs>
-        </WrapperTabs>
+        </TabsWrapper>
 
         {/* Actions */}
-        <WrapperActions>
+        <ActionsWrapper>
           <StyledIconButton size="small">
-            <StyledFontAwesomeIcon icon={["fas", "bell"]} size="2x" />
+            <StyledFontAwesomeIcon icon={["fas", "bell"]} />
           </StyledIconButton>
-          <StyledIconButton size="small">
-            <Avatar />
+          <StyledIconButton size="small" onClick={handleOnAvatarClick}>
+            <StyledAvatar />
           </StyledIconButton>
-        </WrapperActions>
+          <ServiceContentMenu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleOnAvatarClose}
+          >
+            {accounts.map((val, i) => (
+              <ServiceContentMenuItem key={i} listItem={val} />
+            ))}
+          </ServiceContentMenu>
+        </ActionsWrapper>
       </StyledToolbar>
     </StyledAppBar>
   );

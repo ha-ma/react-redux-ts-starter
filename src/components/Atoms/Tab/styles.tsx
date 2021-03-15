@@ -3,5 +3,15 @@ import React from "react";
 
 interface HeaderTabProps extends TabProps {}
 export const HeaderTab = withStyles(theme =>
-  createStyles({})
+  createStyles({
+    root: {
+      backgroundColor: theme.colorPicker("grey", { code: "400" }),
+      border: `solid 1px ${theme.colorPicker("grey", { code: "500" })}`,
+      transition: "background-color 500ms"
+    },
+    selected: {
+      backgroundColor: theme.colorPicker("white"),
+      borderBottom: "unset"
+    }
+  })
 )((props: HeaderTabProps) => <Tab {...props} />);

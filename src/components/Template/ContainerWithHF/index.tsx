@@ -7,15 +7,29 @@ import Header from "../../Organisms/Header";
 import Footer from "../../Organisms/Footer";
 
 //  styled components
-import { StyledContainer, Wrapper } from "./styles";
+import { Wrapper, StyledContainer } from "./styles";
 
-const ContainerWithHF: React.FC = () => {
+interface ComponentProps {
+  HeaderProps?: {
+    in?: boolean;
+  };
+  FooterProps?: {
+    in?: boolean;
+  };
+}
+const Component: React.FC<ComponentProps> = props => {
+  const { HeaderProps, FooterProps } = props;
+  const headerHeight = HeaderProps?.in === false ? 0 : 64;
+  const footerHeight = FooterProps?.in === false ? 0 : 64;
   return (
-    <Wrapper>
-      <Header></Header>
-      <Footer></Footer>
+    <Wrapper headerHeight={headerHeight} footerHeight={footerHeight}>
+      {headerHeight !== 0 && <Header height={headerHeight} />}
+      <StyledContainer maxWidth={"xl"}>
+        <React.Fragment>{props.children}</React.Fragment>
+      </StyledContainer>
+      {footerHeight !== 0 && <Footer height={footerHeight} />}
     </Wrapper>
   );
 };
 
-export default ContainerWithHF;
+export default Component;
