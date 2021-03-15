@@ -28,7 +28,7 @@ const ServiceContentMenuItem = React.forwardRef(function MenuItem(
     <StyledMenuItem onClick={props.onClick}>
       {listItem?.faIcon && (
         <StyledListItemIcon>
-          <FontAwesomeIcon {...listItem.faIcon} />
+          <FontAwesomeIcon {...listItem.faIcon} fixedWidth />
         </StyledListItemIcon>
       )}
       <StyledListItemText primary={label} />

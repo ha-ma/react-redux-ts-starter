@@ -10,20 +10,27 @@ import {
   withStyles
 } from "@material-ui/core";
 
-export const StyledMenuItem = withStyles(theme => ({
-  root: {
-    color: theme.colorPicker("grey"),
-    "&:hover": {
-      backgroundColor: theme.colorPicker("grey", { code: "200" })
-    },
-    "&:focus": {
-      backgroundColor: theme.palette.primary.main,
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: theme.palette.common.white
+export const StyledMenuItem = withStyles(theme => {
+  const border = `solid 1px ${theme.colorPicker("grey", { code: "200" })}`;
+  return {
+    root: {
+      color: theme.colorPicker("grey"),
+      borderTop: border,
+      "&:hover": {
+        backgroundColor: theme.colorPicker("grey", { code: "200" })
+      },
+      "&:focus": {
+        backgroundColor: theme.palette.primary.main,
+        "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+          color: theme.palette.common.white
+        }
+      },
+      "&:last-child": {
+        borderBottom: border
       }
     }
-  }
-}))(MenuItem);
+  };
+})(MenuItem);
 
 export const StyledListItemIcon = withStyles(theme =>
   createStyles({

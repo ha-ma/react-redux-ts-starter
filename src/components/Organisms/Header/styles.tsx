@@ -76,7 +76,7 @@ export const TabsWrapper = styled.div(({ theme }) => {
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-end",
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(10),
     flexGrow: 1
   };
 });
@@ -106,7 +106,7 @@ export const StyledFontAwesomeIcon = styled(
 )<StyledFontAwesomeIconProps>(({ theme }) => {
   return {
     fontSize: theme.fontSize("icon"),
-    color: theme.colorPicker("grey", { code: "900" })
+    color: theme.colorPicker("grey", { code: "800" })
   };
 });
 
@@ -114,7 +114,7 @@ interface StyledAvatarProps extends AvatarProps {}
 export const StyledAvatar = withStyles(theme =>
   createStyles({
     root: {
-      backgroundColor: theme.colorPicker("grey", { code: "900" })
+      backgroundColor: theme.colorPicker("grey", { code: "800" })
     }
   })
 )((props: StyledAvatarProps) => <Avatar {...props} />);

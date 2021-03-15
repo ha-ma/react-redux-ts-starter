@@ -40,7 +40,7 @@ const Component: React.FC<ComponentProps> = props => {
   };
 
   return (
-    <StyledPaper>
+    <StyledPaper elevation={3}>
       <Head>
         <HeadLabel>
           <Code>{content.code}</Code>

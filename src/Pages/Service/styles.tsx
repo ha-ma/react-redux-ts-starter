@@ -50,7 +50,7 @@ export const ServiceContainer = styled.div<ServiceContainerProps>(
 
 export const ContentWrapper = styled.div(({ theme }) => {
   return {
-    width: 350,
+    width: 300,
     padding: theme.spacing(1, 2)
   };
 });

@@ -87,7 +87,11 @@ const Component: React.FC<ComponentProps> = props => {
             onClose={handleOnAvatarClose}
           >
             {accounts.map((val, i) => (
-              <ServiceContentMenuItem key={i} listItem={val} />
+              <ServiceContentMenuItem
+                key={i}
+                listItem={val}
+                onClick={handleOnAvatarClose}
+              />
             ))}
           </ServiceContentMenu>
         </ActionsWrapper>
