@@ -1,13 +1,7 @@
-import {
-  createStyles,
-  makeStyles,
-  Tabs,
-  TabsProps,
-  Theme,
-  withStyles
-} from "@material-ui/core";
-import React, { FormEventHandler } from "react";
-import styled from "styled-components";
+import React from "react";
+
+//  mui
+import { createStyles, Tabs, withStyles } from "@material-ui/core";
 
 interface HeaderTabsProps {
   value?: number | string;

@@ -1,11 +1,13 @@
+import React from "react";
+import styled from "styled-components";
+
+//  mui
 import {
   createStyles,
   Typography,
   TypographyProps,
   withStyles
 } from "@material-ui/core";
-import React from "react";
-import styled from "styled-components";
 
 export const Code = withStyles(theme =>
   createStyles({

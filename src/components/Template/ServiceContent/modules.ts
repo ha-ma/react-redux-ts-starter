@@ -1,5 +1,7 @@
+//  types
 import { ListProps } from "./types";
 
+//  default class
 export default class {
   lists: ListProps = {
     menu: [

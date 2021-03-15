@@ -1,11 +1,13 @@
 import React from "react";
+import styled from "styled-components";
+
+//  mui
 import {
   createStyles,
   Typography,
   TypographyProps,
   withStyles
 } from "@material-ui/core";
-import styled from "styled-components";
 
 interface HeadProps {}
 export const Head = styled.div<HeadProps>(({ theme }) => {

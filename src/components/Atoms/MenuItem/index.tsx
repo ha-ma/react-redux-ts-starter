@@ -10,9 +10,11 @@ import {
   StyledListItemText
 } from "./styles";
 
+//  mui
+import { MenuItemProps } from "@material-ui/core";
+
 //  types
 import { OrigListItemProps } from "../../../types/environment";
-import { MenuItemProps } from "@material-ui/core";
 
 interface ServiceContentMenuItemProps extends MenuItemProps {
   listItem: OrigListItemProps;

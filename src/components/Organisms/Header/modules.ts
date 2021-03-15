@@ -1,5 +1,7 @@
+//  types
 import { List } from "./types";
 
+//  default class
 export default class {
   config = {};
   list: List = {

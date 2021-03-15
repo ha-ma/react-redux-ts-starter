@@ -1,8 +1,13 @@
 import React from "react";
+import styled from "styled-components";
+
+//  faIcon
 import {
   FontAwesomeIcon,
   FontAwesomeIconProps
 } from "@fortawesome/react-fontawesome";
+
+//  styled components
 import {
   AppBar,
   AppBarProps,
@@ -17,7 +22,6 @@ import {
   TypographyProps,
   withStyles
 } from "@material-ui/core";
-import styled from "styled-components";
 
 interface StyledAppBarProps extends AppBarProps {}
 export const StyledAppBar = withStyles(theme =>

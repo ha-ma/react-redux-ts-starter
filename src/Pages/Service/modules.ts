@@ -1,6 +1,8 @@
+//  types
 import { ServiceContentProps } from "../../Components/Template/ServiceContent/types";
 import { LabelsProps } from "./types";
 
+//  default class
 export default class {
   labels: LabelsProps = {
     headLabel: "サービス一覧",
