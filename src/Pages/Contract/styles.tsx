@@ -226,7 +226,8 @@ export const Sort = styled.div(({ theme }) => {
     p: {
       fontSize: theme.fontSize("sm"),
       color: theme.colorPicker("lightBlue"),
-      textDecoration: "underline"
+      textDecoration: "underline",
+      paddingLeft: theme.spacing(0.5)
     }
   };
 });
