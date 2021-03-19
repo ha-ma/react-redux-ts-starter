@@ -19,3 +19,16 @@ export const Code = withStyles(theme =>
     }
   })
 )((props: TypographyProps) => <Typography {...props} />);
+
+export const SmallCode = withStyles(theme =>
+  createStyles({
+    root: {
+      display: "inline-block",
+      backgroundColor: theme.colorPicker("grey", { code: "400" }),
+      color: theme.colorPicker("white", { code: "400" }),
+      padding: theme.spacing(0.5, 2),
+      fontSize: "10.5px",
+      borderRadius: "12px"
+    }
+  })
+)((props: TypographyProps) => <Typography {...props} />);

@@ -1,5 +1,5 @@
 //  types
-import { ServiceContentProps } from "../../Components/Template/ServiceContent/types";
+import { ServiceContentProps } from "../../components/Template/ServiceContent/types";
 import { LabelsProps } from "./types";
 
 //  default class
