@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //  molucule template components
 import ContainerWithHF from "../../components/Template/ContainerWithHF";
 import ServiceContent from "../../components/Template/ServiceContent";
+import ContractListItemComponent from "../../components/Molucules/ContractListItem";
 
 //  atom , molucule components
 import { SmallCode } from "../../components/Atoms/Label";
@@ -30,7 +31,6 @@ import {
   StyledFontAwesomeIconSearch,
   StyledFontAwesomeIconMedium,
   StyledFontAwesomeIconArrowRight,
-  StyledFontAwesomeIconArrowDown,
   StyledMenuItem,
   ListBlock,
   ListHeader,
@@ -38,31 +38,13 @@ import {
   Sort,
   SummarizeLink,
   ContractList,
-  ContractListItem,
-  ListItemText,
-  ContractDate,
-  ListItemContentWrapper,
-  ListItemContentInner,
-  CodeWrapper,
-  InvoiceStatus,
-  InvoiceListItem,
   ContractPreviewBlock,
   ContractPreviewContainer
 } from "./styles";
 import { LanguageProps } from "../../types/environment";
 
-import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-// import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
-// import InboxIcon from "@material-ui/icons/MoveToInbox";
-// import DraftsIcon from "@material-ui/icons/Drafts";
-// import SendIcon from "@material-ui/icons/Send";
-// import ExpandLess from "@material-ui/icons/ExpandLess";
-// import ExpandMore from "@material-ui/icons/ExpandMore";
-// import StarBorder from "@material-ui/icons/StarBorder";
 
 //  modules
 import SelfClass from "./modules";
@@ -75,28 +57,6 @@ const Component: React.FC = () => {
   const [clients, setClients] = React.useState(selfClass.clients);
   const [contracts, setContracts] = React.useState(selfClass.contracts);
   const [invoices, setInvoices] = React.useState(selfClass.invoices);
-
-  const [open1, setOpen1] = React.useState(true);
-
-  const handleClick1 = () => {
-    setOpen1(!open1);
-  };
-
-  // const [open, setOpen] = React.useState(true);
-
-  // const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-  //   setOpen(!open);
-  //   const element = e.target as HTMLElement;
-  //   element.classList.add("open");
-  // };
-  interface OpenCloseObject {
-    [key: number]: boolean;
-  }
-
-  const [open, setOpen] = React.useState({} as OpenCloseObject);
-  const handleClick = (id: number) => {
-    setOpen(prevState => ({ ...prevState, [id]: !prevState[id] }));
-  };
 
   return (
     <ContainerWithHF FooterProps={{ in: false }} HeaderProps={{ in: true }}>
@@ -138,18 +98,6 @@ const Component: React.FC = () => {
               ))}
             </SearchBlockSelect>
           </SearchBlockItem>
-
-          {/* <TextField
-            id="input-with-icon-textfield"
-            label="TextField"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <StyledFontAwesomeIcon icon={["fas", "search"]} />
-                </InputAdornment>
-              )
-            }}
-          /> */}
 
           <SearchBlockItem>
             <SearchBlockLabel>請求対象期間</SearchBlockLabel>
@@ -203,92 +151,17 @@ const Component: React.FC = () => {
 
           <ContractList>
             {contracts.map((contract, index) => (
-              <>
-                <ContractListItem
-                  key={index}
-                  button
-                  onClick={() => handleClick(index)}
-                >
-                  {open[index] ? (
-                    <StyledFontAwesomeIconArrowDown
-                      icon={["fas", "caret-up"]}
-                    />
-                  ) : (
-                    <StyledFontAwesomeIconArrowDown
-                      icon={["fas", "caret-down"]}
-                    />
-                  )}
-
-                  <StyledFontAwesomeIconMedium icon={["fas", "folder"]} />
-                  <ListItemContentWrapper>
-                    <CodeWrapper>
-                      <SmallCode>contract-001</SmallCode>
-                      <SmallCode>service-001</SmallCode>
-                    </CodeWrapper>
-                    <ListItemContentInner>
-                      <ListItemText>
-                        {console.log(
-                          clients.filter(client => client.id === contract.id)[0]
-                            .display_name
-                        )}
-                        {`${
-                          clients.filter(client => client.id === contract.id)[0]
-                            .display_name
-                        }さま - ${
-                          services.filter(
-                            service => service.id === contract.id
-                          )[0].display_name
-                        }のご契約`}
-                      </ListItemText>
-                      <div>
-                        <SmallCode>
-                          {
-                            clients.filter(
-                              client => client.id === contract.id
-                            )[0].id
-                          }
-                        </SmallCode>
-                        <ContractDate>{`${contract.start_date
-                          .slice(0, 10)
-                          .replace(/-/g, "/")} ~ ${
-                          contract.end_date !== null
-                            ? contract.end_date.slice(0, 10).replace(/-/g, "/")
-                            : null
-                        }`}</ContractDate>
-                      </div>
-                    </ListItemContentInner>
-                  </ListItemContentWrapper>
-                </ContractListItem>
-                <Collapse in={open[index]} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    {invoices.map(invoice => (
-                      <>
-                        <InvoiceListItem button key={invoice.id}>
-                          <StyledFontAwesomeIconMedium
-                            icon={["fas", "file-alt"]}
-                          />
-                          <ListItemContentWrapper>
-                            <CodeWrapper className="invoice">
-                              <SmallCode>{invoice.id}</SmallCode>
-                              {/* <InvoiceStatus>{invoice.status}</InvoiceStatus> */}
-                            </CodeWrapper>
-                            <ListItemContentInner>
-                              <ListItemText>
-                                {invoice.closing_date
-                                  .slice(0, 10)
-                                  .replace(/-/g, "/")}
-                              </ListItemText>
-                              <ListItemText>{`¥${Math.floor(
-                                Number(invoice.total)
-                              ).toLocaleString()}`}</ListItemText>
-                            </ListItemContentInner>
-                          </ListItemContentWrapper>
-                        </InvoiceListItem>
-                      </>
-                    ))}
-                  </List>
-                </Collapse>
-              </>
+              <ContractListItemComponent
+                key={index}
+                contract={contract}
+                client={clients.filter(client => client.id === contract.id)[0]}
+                service={
+                  services.filter(service => service.id === contract.id)[0]
+                }
+                invoices={invoices.filter(
+                  invoice => invoice.contract_id === contract.id
+                )}
+              />
             ))}
           </ContractList>
         </ListBlock>

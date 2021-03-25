@@ -3,7 +3,7 @@ import { ServiceContentProps } from "../../components/Template/ServiceContent/ty
 import { LabelsProps } from "./types";
 import { LanguageProps } from "../../types/environment";
 
-export interface ServiceItemListProps {
+export interface ServiceItemProps {
   account_id: LanguageProps;
   id: LanguageProps;
   code: LanguageProps;
@@ -16,7 +16,7 @@ export interface ServiceItemListProps {
   created_at: LanguageProps;
   updated_at: LanguageProps;
 }
-export interface ClientsListProps {
+export interface ClientsItemProps {
   id: LanguageProps;
   code: LanguageProps;
   display_name: string;
@@ -29,7 +29,7 @@ export interface ClientsListProps {
   updated_at: LanguageProps;
 }
 
-export interface ContractItemListProps {
+export interface ContractItemProps {
   account_id: LanguageProps;
   id: LanguageProps;
   code: LanguageProps;
@@ -71,7 +71,7 @@ export interface ContractItemListProps {
   updated_at: LanguageProps;
 }
 
-export interface InvoiceItemListProps {
+export interface InvoiceItemProps {
   id: string;
   service_id: string;
   service_code: string;
@@ -135,7 +135,7 @@ export default class {
   // contents: ServiceContentProps[] = new Array(14).fill("").map((val, i) => {
   //   return { code: `service-${i}`, name: `ISP-${("000" + i).slice(-3)}` };
   // });
-  services: ServiceItemListProps[] = new Array(14).fill("").map((val, i) => {
+  services: ServiceItemProps[] = new Array(14).fill("").map((val, i) => {
     return {
       account_id: "b0b3175a-a6bb-450b-821d-c73c15d22ab0",
       id: "b0b3175a-a6bb-450b-821d-c73c15d22ab0",
@@ -150,7 +150,7 @@ export default class {
       updated_at: "2018-12-12T05:07:11.393Z"
     };
   });
-  clients: ClientsListProps[] = new Array(14).fill("").map((val, i) => {
+  clients: ClientsItemProps[] = new Array(14).fill("").map((val, i) => {
     return {
       id: "b0b3175a-a6bb-450b-821d-c73c15d22ab0",
       code: `${i}-company`,
@@ -164,7 +164,7 @@ export default class {
       updated_at: "2018-12-12T05:07:11.393Z"
     };
   });
-  contracts: ContractItemListProps[] = new Array(10).fill("").map((val, i) => {
+  contracts: ContractItemProps[] = new Array(10).fill("").map((val, i) => {
     return {
       account_id: "b0b3175a-a6bb-450b-821d-c73c15d22ab0",
       id: "b0b3175a-a6bb-450b-821d-c73c15d22ab0",
@@ -207,7 +207,7 @@ export default class {
       updated_at: "2018-12-12T05:07:11.393Z"
     };
   });
-  invoices: InvoiceItemListProps[] = new Array(2).fill("").map((val, i) => {
+  invoices: InvoiceItemProps[] = new Array(2).fill("").map((val, i) => {
     return {
       id: "b0b3175a-a6bb-450b-821d-c73c15d22ab0",
       service_id: "b0b3175a-a6bb-450b-821d-c73c15d22ab0",
