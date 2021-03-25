@@ -53,8 +53,7 @@ const Component: React.FC<ComponentProps> = props => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {/* TODO: なんかanyじゃないと動かなくなった */}
-          {menu.map((val: any, i: any) => (
+          {menu.map((val, i) => (
             <ServiceContentMenuItem
               key={i}
               listItem={val}
