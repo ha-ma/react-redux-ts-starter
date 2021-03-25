@@ -189,7 +189,9 @@ export const StyledFontAwesomeIconArrowDown = styled(
 
 export const ContentBlock = styled.div(({ theme }) => {
   return {
-    border: "1px solid grey"
+    border: "1px solid grey",
+    display: "flex",
+    height: "calc(100% - 167px)"
   };
 });
 
@@ -246,7 +248,8 @@ export const ContractList = withStyles(theme =>
     root: {
       border: "1px solid black",
       margin: theme.spacing(0.5),
-      overflowY: "scroll"
+      overflowY: "scroll",
+      height: "calc(100% - 86px)"
     }
   })
 )((props: ListProps) => <List {...props} />);
@@ -336,3 +339,18 @@ export const InvoiceStatus = withStyles(theme =>
     }
   })
 )((props: TypographyProps) => <Typography {...props} />);
+
+export const ContractPreviewBlock = styled.div(({ theme }) => {
+  return {
+    backgroundColor: theme.colorPicker("grey", { code: "300" }),
+    width: "100%"
+  };
+});
+
+export const ContractPreviewContainer = styled.div(({ theme }) => {
+  return {
+    backgroundColor: theme.colorPicker("white", { code: "500" }),
+    width: "90%",
+    margin: "15px auto"
+  };
+});

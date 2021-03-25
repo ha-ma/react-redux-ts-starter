@@ -45,8 +45,11 @@ import {
   ListItemContentInner,
   CodeWrapper,
   InvoiceStatus,
-  InvoiceListItem
+  InvoiceListItem,
+  ContractPreviewBlock,
+  ContractPreviewContainer
 } from "./styles";
+import { LanguageProps } from "../../types/environment";
 
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
@@ -96,7 +99,7 @@ const Component: React.FC = () => {
   };
 
   return (
-    <ContainerWithHF FooterProps={{ in: false }}>
+    <ContainerWithHF FooterProps={{ in: false }} HeaderProps={{ in: true }}>
       <Head>
         <HeadLabel>{labels.headLabel}</HeadLabel>
         <Description>{labels.description}</Description>
@@ -112,9 +115,9 @@ const Component: React.FC = () => {
               variant="outlined"
             >
               <StyledMenuItem value="">Type to filter...</StyledMenuItem>
-              {services.map(item => (
-                <StyledMenuItem key={item.id} value={item.id}>
-                  {item.name}
+              {services.map((item, index) => (
+                <StyledMenuItem key={index} value={item.display_name}>
+                  {item.display_name}
                 </StyledMenuItem>
               ))}
             </SearchBlockSelect>
@@ -128,9 +131,9 @@ const Component: React.FC = () => {
               variant="outlined"
             >
               <StyledMenuItem value="">Type to filter...</StyledMenuItem>
-              {clients.map(item => (
-                <StyledMenuItem key={item.id} value={item.id}>
-                  {item.name}
+              {clients.map((item, index) => (
+                <StyledMenuItem key={index} value={item.display_name}>
+                  {item.display_name}
                 </StyledMenuItem>
               ))}
             </SearchBlockSelect>
@@ -199,14 +202,14 @@ const Component: React.FC = () => {
           </ListHeader>
 
           <ContractList>
-            {contracts.map(contract => (
+            {contracts.map((contract, index) => (
               <>
                 <ContractListItem
-                  key={contract.id}
+                  key={index}
                   button
-                  onClick={() => handleClick(contract.id)}
+                  onClick={() => handleClick(index)}
                 >
-                  {open[contract.id] ? (
+                  {open[index] ? (
                     <StyledFontAwesomeIconArrowDown
                       icon={["fas", "caret-up"]}
                     />
@@ -224,16 +227,39 @@ const Component: React.FC = () => {
                     </CodeWrapper>
                     <ListItemContentInner>
                       <ListItemText>
-                        {`${contract.clientName}さま - ${contract.contractName}のご契約`}
+                        {console.log(
+                          clients.filter(client => client.id === contract.id)[0]
+                            .display_name
+                        )}
+                        {`${
+                          clients.filter(client => client.id === contract.id)[0]
+                            .display_name
+                        }さま - ${
+                          services.filter(
+                            service => service.id === contract.id
+                          )[0].display_name
+                        }のご契約`}
                       </ListItemText>
                       <div>
-                        <SmallCode>{contract.clientId}</SmallCode>
-                        <ContractDate>{`${contract.startDate} ~ ${contract.endDate}`}</ContractDate>
+                        <SmallCode>
+                          {
+                            clients.filter(
+                              client => client.id === contract.id
+                            )[0].id
+                          }
+                        </SmallCode>
+                        <ContractDate>{`${contract.start_date
+                          .slice(0, 10)
+                          .replace(/-/g, "/")} ~ ${
+                          contract.end_date !== null
+                            ? contract.end_date.slice(0, 10).replace(/-/g, "/")
+                            : null
+                        }`}</ContractDate>
                       </div>
                     </ListItemContentInner>
                   </ListItemContentWrapper>
                 </ContractListItem>
-                <Collapse in={open[contract.id]} timeout="auto" unmountOnExit>
+                <Collapse in={open[index]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {invoices.map(invoice => (
                       <>
@@ -243,12 +269,18 @@ const Component: React.FC = () => {
                           />
                           <ListItemContentWrapper>
                             <CodeWrapper className="invoice">
-                              <SmallCode>{invoice.invoiceId}</SmallCode>
-                              <InvoiceStatus>{invoice.status}</InvoiceStatus>
+                              <SmallCode>{invoice.id}</SmallCode>
+                              {/* <InvoiceStatus>{invoice.status}</InvoiceStatus> */}
                             </CodeWrapper>
                             <ListItemContentInner>
-                              <ListItemText>{invoice.date}</ListItemText>
-                              <ListItemText>{invoice.total}</ListItemText>
+                              <ListItemText>
+                                {invoice.closing_date
+                                  .slice(0, 10)
+                                  .replace(/-/g, "/")}
+                              </ListItemText>
+                              <ListItemText>{`¥${Math.floor(
+                                Number(invoice.total)
+                              ).toLocaleString()}`}</ListItemText>
                             </ListItemContentInner>
                           </ListItemContentWrapper>
                         </InvoiceListItem>
@@ -260,6 +292,75 @@ const Component: React.FC = () => {
             ))}
           </ContractList>
         </ListBlock>
+        <ContractPreviewBlock>
+          <ContractPreviewContainer className="container">
+            <div className="contractHeader">
+              <div className="contractHeader_service">
+                <p className="id">service-1</p>
+                <p className="displayName">ISP-001</p>
+              </div>
+              <h2 className="contractHeader_title">契約</h2>
+              <div className="contractHeader_customer">
+                <p className="id">customer-1</p>
+                <p className="display_name">{`${"〇〇〇〇〇〇"}さま`}</p>
+              </div>
+            </div>
+            <div className="contractTitle">
+              <div className="contractTitle_inner">
+                <p className="id">contract-001</p>
+                <p className="timespan"></p>
+              </div>
+              <h1 className="contractTitle_displayName">
+                {`${"〇〇〇〇〇〇"}さま - ${"ISP-001"}のご契約`}
+              </h1>
+              <img src="" alt="" />
+            </div>
+
+            <div className="contractPager">
+              <p className="numOfContract">{`この契約の請求(${36})`}</p>
+              <img src="" alt="" />
+              <img src="" alt="" />
+              <img src="" alt="" />
+              <img src="" alt="" />
+              <p className="comment">最新（未確定）の請求です</p>
+            </div>
+
+            <ul className="invoices">
+              <li className="invoice">
+                <div className="invoiceHeader">
+                  <div className="invoiceHeaderInner">
+                    <p className="id">invoice-1</p>
+                    <p className="status">未確定</p>
+                  </div>
+                  <div className="invoiceHeaderInner">
+                    <p className="date">2021/02/28</p>
+                    <p className="total">¥12,345</p>
+                  </div>
+                </div>
+                <dl className="invoiceItemlist">
+                  <dt className="invoiceItem__name">ISP(２年縛り月額2000円)</dt>
+                  <dt>-</dt>
+                  <dt>x1</dt>
+                  <dt>¥1,234</dt>
+                  <dt className="invoiceItem__name">割引１(1年間700円引き)</dt>
+                  <dt>-</dt>
+                  <dt>x1</dt>
+                  <dt>¥1,234</dt>
+                  <dt className="invoiceItem__name">オプション１(永年500円)</dt>
+                  <dt>-</dt>
+                  <dt>x1</dt>
+                  <dt>¥1,234</dt>
+                  <dt className="invoiceItem__name">〇〇使用料</dt>
+                  <dt>-</dt>
+                  <dt>x234</dt>
+                  <dt>¥1,234</dt>
+                </dl>
+              </li>
+            </ul>
+
+            <button>閉じる</button>
+          </ContractPreviewContainer>
+        </ContractPreviewBlock>
       </ContentBlock>
     </ContainerWithHF>
   );
