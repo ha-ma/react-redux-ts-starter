@@ -23,5 +23,9 @@ export const Wrapper = styled.div<{
 
 interface StyledContainerProps extends ContainerProps {}
 export const StyledContainer = withStyles(theme =>
-  createStyles({})
+  createStyles({
+    root: {
+      paddingBottom: 100
+    }
+  })
 )((props: StyledContainerProps) => <Container {...props} />);

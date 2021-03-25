@@ -1,25 +1,19 @@
 import React from "react";
 
 //  molucule template components
-import ContainerWithHF from "../../Components/Template/ContainerWithHF";
-import ServiceContent from "../../Components/Template/ServiceContent";
+import ContainerWithHF from "../../components/Template/ContainerWithHF";
 
-import ServiceItem from "../../Components/Template/ServiceContentDetailItem";
+// mapで品目のカードを出してみたかったので、一旦Templeteに作成
+import ServiceItem from "../../components/Template/ServiceContentDetailItem";
 
 //  styled components
 import {
   Code,
   BoldLabel,
-  Head,
-  HeadLabel,
-  Description,
   AddItemButton,
   ServiceContainer,
-  ContentWrapper,
   ServiceItemCard,
   ItemBoldLabel,
-  CountContructer,
-  CountContructerChar,
   StyledFaIcon,
   StyledIconButton
 } from "./styles";
@@ -37,25 +31,11 @@ const Component: React.FC = () => {
 
   return (
     <ContainerWithHF FooterProps={{ in: false }}>
-      <Head></Head>
-      <Grid container>
+      {/* サービスタイトル、サービスコード */}
+      <Grid container style={{ paddingTop: 50 }}>
         <Grid item sm={6}>
-          <Code>
-            {service.code}
-            <StyledIconButton>
-              <StyledFaIcon
-                size={"xs"}
-                icon={["fas", "pencil-alt"]}
-                fixedWidth
-              />
-            </StyledIconButton>
-          </Code>
-          <BoldLabel>
-            {service.name}
-            <StyledIconButton>
-              <StyledFaIcon icon={["fas", "pencil-alt"]} fixedWidth />
-            </StyledIconButton>
-          </BoldLabel>
+          <Code>{service.code}</Code>
+          <BoldLabel>{service.name}</BoldLabel>
         </Grid>
         <Grid item sm={6}>
           <StyledIconButton style={{ float: "right" }}>
@@ -65,61 +45,68 @@ const Component: React.FC = () => {
       </Grid>
       <Grid container>
         {/* 品目 */}
-        <Grid item sm={4}>
-          <ServiceContainer>
-            <Grid
-              container
-              direction="row"
-              // justify="space-between"
-              alignItems="baseline"
-            >
-              <div>品目（{items.length}）</div>
-              {/* AddItembutton + AddIcon = 1つのコンポーネント？ */}
-              <AddItemButton>
-                <StyledFaIcon icon={["fas", "plus"]} fixedWidth />
-                追加
-              </AddItemButton>
-            </Grid>
-          </ServiceContainer>
-          <ServiceContainer>
+        <Grid item sm={3}>
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="baseline"
+          >
+            <div>品目（{items.length}）</div>
+            {/* AddItembutton + AddIcon = 1つのコンポーネント？ */}
+            <AddItemButton>
+              <StyledFaIcon icon={["fas", "plus"]} fixedWidth />
+              追加
+            </AddItemButton>
+          </Grid>
+          <Grid>
             {items.map((val, i) => (
               <ServiceItem key={i} content={val}></ServiceItem>
             ))}
-          </ServiceContainer>
+          </Grid>
         </Grid>
+        <Grid item sm={1} />
         {/* 割引 */}
-        <Grid item sm={4}>
-          <div style={{ display: "flex" }}>
+        <Grid item sm={3}>
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="baseline"
+          >
             <div>割引（6）</div>
             {/* AddItembutton + AddIcon = 1つのコンポーネント？ */}
             <AddItemButton>
               <StyledFaIcon icon={["fas", "plus"]} fixedWidth />
               追加
             </AddItemButton>
-          </div>
-          <ServiceContainer>
-            <ServiceItemCard>
-              <ItemBoldLabel>yyyy/mm/dd</ItemBoldLabel>
-              <div style={{ display: "flex" }}>
-                <ItemBoldLabel>ISP (2年縛り月額2000円)</ItemBoldLabel>
-                <div style={{ display: "block" }}>
-                  <ItemBoldLabel>- ¥700</ItemBoldLabel>
-                </div>
+          </Grid>
+          <ServiceItemCard>
+            <ItemBoldLabel>yyyy/mm/dd</ItemBoldLabel>
+            <div style={{ display: "flex" }}>
+              <ItemBoldLabel>ISP (2年縛り月額2000円)</ItemBoldLabel>
+              <div style={{ display: "block" }}>
+                <ItemBoldLabel>- ¥700</ItemBoldLabel>
               </div>
-            </ServiceItemCard>
-          </ServiceContainer>
+            </div>
+          </ServiceItemCard>
         </Grid>
-
+        <Grid item sm={1} />
         <Grid item sm={4}>
           <ServiceContainer>
-            <div style={{ display: "flex" }}>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="baseline"
+            >
               <div>契約（6）</div>
               {/* AddItembutton + AddIcon = 1つのコンポーネント？ */}
               <AddItemButton>
                 <StyledFaIcon icon={["fas", "plus"]} fixedWidth />
                 追加
               </AddItemButton>
-            </div>
+            </Grid>
           </ServiceContainer>
           <ServiceItemCard>
             <div style={{ display: "flex" }}>

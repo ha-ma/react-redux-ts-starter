@@ -3,23 +3,11 @@ import React from "react";
 //  styled components
 import {
   Code,
-  BoldLabel,
-  Head,
-  HeadLabel,
-  Description,
-  AddItemButton,
-  ServiceContainer,
-  ContentWrapper,
   ServiceItemCard,
   ItemBoldLabel,
   CountContructer,
-  CountContructerChar,
-  StyledFaIcon,
-  StyledIconButton,
-  StyledCardActions
+  CountContructerChar
 } from "./styles";
-
-import { Grid } from "@material-ui/core";
 
 import { ServiceItemProps } from "./types";
 
@@ -33,16 +21,16 @@ interface ComponentProps {
 
 const Component: React.FC<ComponentProps> = props => {
   const selfClass = new SelfClass();
-
   const { content } = props;
 
   return (
     <ServiceItemCard>
-      <Code>Service-1</Code>
+      <Code>{content.code}</Code>
+      <React.Fragment></React.Fragment>
       <div style={{ display: "flex" }}>
-        <ItemBoldLabel>ISP (2年縛り月額2000円)</ItemBoldLabel>
+        <ItemBoldLabel>{content.name}</ItemBoldLabel>
         <div style={{ display: "block" }}>
-          <CountContructer>123</CountContructer>
+          <CountContructer>{content.totalContractor}</CountContructer>
           <CountContructerChar>契約数</CountContructerChar>
         </div>
       </div>

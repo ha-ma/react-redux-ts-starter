@@ -8,19 +8,3 @@ export interface ServiceItemProps {
   name: string;
   totalContractor: Number;
 }
-
-// 以下コピペ
-export interface LabelsProps {
-  headLabel: LanguageProps;
-  description: LanguageProps;
-}
-
-// service一覧で使ってたIF
-export interface ServiceContentProps {
-  code: string;
-  name: LanguageProps;
-}
-
-export interface ListProps {
-  menu: OrigListItemProps[];
-}
