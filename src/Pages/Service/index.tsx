@@ -1,8 +1,8 @@
 import React from "react";
 
 //  molucule template components
-import ContainerWithHF from "../../Components/Template/ContainerWithHF";
-import ServiceContent from "../../Components/Template/ServiceContent";
+import ContainerWithHF from "../../components/Template/ContainerWithHF";
+import ServiceContent from "../../components/Template/ServiceContent";
 
 //  styled components
 import {

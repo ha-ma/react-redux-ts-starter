@@ -1,4 +1,4 @@
 //  styled components
-import { Code } from "./styles";
+import { Code, SmallCode } from "./styles";
 
-export { Code };
+export { Code, SmallCode };
